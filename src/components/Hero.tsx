@@ -1,11 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { ArrowDown, Zap } from "lucide-react";
 
 export default function Hero() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 pb-16">
+    <section className="relative flex items-center justify-center pt-28 pb-20" style={{ minHeight: "90vh" }}>
       {/* Background effects */}
       <div className="hero-grid" />
       <div className="orb orb-1" />
@@ -16,23 +20,28 @@ export default function Hero() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         {/* Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={mounted ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-border-accent)] bg-[rgba(59,130,246,0.08)] mb-8 badge-glow"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-8 badge-glow"
+          style={{
+            border: "1px solid rgba(59, 130, 246, 0.3)",
+            background: "rgba(59, 130, 246, 0.08)",
+          }}
         >
-          <Zap size={14} className="text-[var(--color-accent-cyan)]" />
-          <span className="text-sm text-[var(--color-accent-cyan)] font-medium">
+          <Zap size={14} className="text-cyan-400" />
+          <span className="text-sm text-cyan-400 font-medium">
             Internal Strategy Presentation
           </span>
         </motion.div>
 
         {/* Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="font-[family-name:var(--font-display)] text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-6"
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-8"
+          style={{ fontFamily: "var(--font-display)" }}
         >
           The Future of
           <br />
@@ -43,10 +52,10 @@ export default function Hero() {
 
         {/* Subheadline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={mounted ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.3 }}
-          className="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
           How React, Next.js, and AI-powered development can transform
           TopFire Media&apos;s workflow&mdash;delivering faster, more secure, and
@@ -55,20 +64,27 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={mounted ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          transition={{ duration: 0.6, delay: 1 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-16"
         >
           <a
             href="#problem"
-            className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[var(--color-accent-blue)] to-[var(--color-accent-cyan)] text-white font-semibold text-base hover:shadow-[0_0_40px_rgba(59,130,246,0.35)] transition-all duration-300 hover:scale-105"
+            className="px-8 py-3.5 rounded-full text-white font-semibold text-base transition-all duration-300 hover:scale-105"
+            style={{
+              background: "linear-gradient(135deg, #3b82f6, #06b6d4)",
+              boxShadow: "0 0 20px rgba(59, 130, 246, 0.2)",
+            }}
           >
             See the Case
           </a>
           <a
             href="#comparison"
-            className="px-8 py-3.5 rounded-full border border-[var(--color-glass-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-accent-blue)] transition-all duration-300"
+            className="px-8 py-3.5 rounded-full text-slate-400 hover:text-white transition-all duration-300"
+            style={{
+              border: "1px solid rgba(255, 255, 255, 0.15)",
+            }}
           >
             Jump to Comparison
           </a>
@@ -76,10 +92,15 @@ export default function Hero() {
 
         {/* Stats bar */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.8 }}
-          className="glass-card inline-flex flex-wrap justify-center divide-x divide-[var(--color-border-subtle)] rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)]"
+          transition={{ duration: 0.6, delay: 1.2 }}
+          className="inline-grid grid-cols-2 md:grid-cols-4 rounded-2xl overflow-hidden"
+          style={{
+            background: "rgba(255, 255, 255, 0.05)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            backdropFilter: "blur(20px)",
+          }}
         >
           {[
             { value: "3-5x", label: "Faster Development" },
@@ -87,34 +108,48 @@ export default function Hero() {
             { value: "$0", label: "Server Maintenance" },
             { value: "99.99%", label: "Uptime on Vercel" },
           ].map((stat, i) => (
-            <div key={i} className="px-6 md:px-10 py-5">
-              <div className="text-2xl md:text-3xl font-bold font-[family-name:var(--font-display)] gradient-text">
+            <div
+              key={i}
+              className="px-8 md:px-10 py-5"
+              style={{
+                borderLeft:
+                  i === 1 || i === 3
+                    ? "1px solid rgba(255, 255, 255, 0.1)"
+                    : i === 2
+                    ? "none"
+                    : "none",
+                borderRight:
+                  i === 0 || i === 2
+                    ? "none"
+                    : "none",
+              }}
+            >
+              <div
+                className="text-2xl md:text-3xl font-bold gradient-text"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
                 {stat.value}
               </div>
-              <div className="text-xs md:text-sm text-[var(--color-text-secondary)] mt-1.5">
+              <div className="text-xs md:text-sm text-slate-400 mt-1.5 whitespace-nowrap">
                 {stat.label}
               </div>
             </div>
           ))}
         </motion.div>
-
       </div>
 
       {/* Scroll indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={mounted ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
+        transition={{ delay: 2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <ArrowDown
-            size={20}
-            className="text-[var(--color-text-muted)]"
-          />
+          <ArrowDown size={20} className="text-slate-600" />
         </motion.div>
       </motion.div>
     </section>

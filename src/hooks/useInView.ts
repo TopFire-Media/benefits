@@ -28,3 +28,9 @@ export function useInView(threshold = 0.15, once = true) {
 
   return { ref, isInView };
 }
+
+export function useMounted() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted;
+}

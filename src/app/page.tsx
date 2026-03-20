@@ -10,7 +10,7 @@ import CTA from "@/components/CTA";
 
 export default function Home() {
   return (
-    <main className="relative bg-[var(--color-bg-deep)] min-h-screen">
+    <main className="relative min-h-screen" style={{ background: "#06060c" }}>
       <Navigation />
       <Hero />
       <div className="section-divider" />

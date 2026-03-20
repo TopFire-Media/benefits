@@ -26,26 +26,18 @@
   --color-glass-border: rgba(255, 255, 255, 0.08);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html {
   scroll-behavior: smooth;
-  background: var(--color-bg-deep);
+  background: #06060c;
   scrollbar-width: thin;
   scrollbar-color: rgba(59, 130, 246, 0.3) transparent;
 }
 
 body {
   font-family: var(--font-body);
-  color: var(--color-text-primary);
-  background: var(--color-bg-deep);
+  color: #f1f5f9;
+  background: #06060c;
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
@@ -58,54 +50,44 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+    linear-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
   background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%);
-  animation: gridPulse 8s ease-in-out infinite;
-}
-
-@keyframes gridPulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 40%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 40%, black 20%, transparent 80%);
 }
 
 /* Floating orbs */
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.25;
-  animation: orbFloat 20s ease-in-out infinite;
+  filter: blur(120px);
+  opacity: 0.35;
   pointer-events: none;
 }
 
 .orb-1 {
-  width: 600px;
-  height: 600px;
-  background: var(--color-accent-blue);
-  top: -10%;
-  right: -10%;
-  animation-delay: 0s;
+  width: 500px;
+  height: 500px;
+  background: #3b82f6;
+  top: 5%;
+  right: 10%;
 }
 
 .orb-2 {
-  width: 500px;
-  height: 500px;
-  background: var(--color-accent-cyan);
-  bottom: -15%;
-  left: -10%;
-  animation-delay: -7s;
+  width: 400px;
+  height: 400px;
+  background: #06b6d4;
+  bottom: 10%;
+  left: 5%;
 }
 
 .orb-3 {
-  width: 400px;
-  height: 400px;
-  background: var(--color-accent-teal);
-  top: 40%;
-  left: 50%;
-  animation-delay: -14s;
+  width: 350px;
+  height: 350px;
+  background: #14b8a6;
+  top: 50%;
+  left: 40%;
 }
 
 @keyframes orbFloat {
