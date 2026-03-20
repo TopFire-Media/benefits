@@ -26,8 +26,8 @@ const categories = [
   {
     category: "Dev Speed",
     metric: "With AI Workflow",
-    wordpress: { value: "2-3 weeks", bar: 30, verdict: "poor" },
-    nextjs: { value: "2-3 days", bar: 90, verdict: "great" },
+    wordpress: { value: "2-3 weeks dev time", bar: 30, verdict: "poor" },
+    nextjs: { value: "2-3 days dev time", bar: 90, verdict: "great" },
   },
   {
     category: "Scalability",

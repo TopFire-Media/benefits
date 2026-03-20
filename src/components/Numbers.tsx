@@ -11,7 +11,7 @@ const stats = [
     suffix: "%",
     label: "Faster Development Time",
     description:
-      "Sites built in 2-3 days instead of 2-3 weeks. AI assists developers with boilerplate, components, and iterations.",
+      "Actual development time drops from 2-3 weeks to 2-3 days. AI assists developers with boilerplate, components, and iterations. This is hands-on-keyboard time, not overall project timeline.",
     color: "#60a5fa",
     bg: "rgba(59, 130, 246, 0.1)",
   },
@@ -21,7 +21,7 @@ const stats = [
     suffix: "%",
     label: "Lower Total Cost",
     description:
-      "No VPS management, no plugin licenses, no emergency security patches. Vercel + headless CMS is leaner.",
+      "No VPS management, no plugin licenses, no emergency security patches. Vercel + headless CMS is leaner. Built-in SEO tooling also reduces reliance on outside SEO services.",
     color: "#34d399",
     bg: "rgba(16, 185, 129, 0.1)",
   },
@@ -41,7 +41,7 @@ const stats = [
     suffix: "/100",
     label: "Lighthouse Performance",
     description:
-      "Perfect scores mean better SEO rankings, happier visitors, and more franchise leads converting.",
+      "Perfect scores mean better SEO rankings out of the box — less manual optimization, fewer third-party SEO tools, and more franchise leads converting without extra spend.",
     color: "#a78bfa",
     bg: "rgba(139, 92, 246, 0.1)",
   },

@@ -13,16 +13,16 @@ import {
 const steps = [
   {
     icon: MessageSquareCode,
-    title: "AI Generates Components",
+    title: "AI-Assisted Component Building",
     description:
-      "Describe what you need in natural language. Claude Code in VS Code writes production-ready React components, handles routing, styling, and business logic.",
+      "Developers leverage Claude Code in their IDE to rapidly scaffold and refine React components. AI accelerates the process while the developer drives architecture and quality decisions.",
     time: "Minutes",
   },
   {
     icon: Eye,
     title: "Preview & Iterate",
     description:
-      "Hot reload shows changes instantly. Review, refine, and polish in real-time. The AI iterates based on feedback until it's perfect.",
+      "Hot reload shows changes instantly. Developers review, refine, and polish in real-time — iterating rapidly until it's perfect.",
     time: "Real-time",
   },
   {
@@ -73,7 +73,7 @@ export default function Workflow() {
             From Idea to <span className="gradient-text">Live Site</span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            What used to take 2-3 weeks in WordPress now takes 2-3 days.
+            Actual development time that used to take 2-3 weeks in WordPress now takes 2-3 days.
             Here&apos;s exactly how the new workflow operates.
           </p>
         </FadeIn>
@@ -84,7 +84,7 @@ export default function Workflow() {
             <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
               <div className="flex-1">
                 <p className="text-xs uppercase tracking-wider text-red-400 mb-3 font-semibold">
-                  WordPress + Elementor
+                  WordPress + Elementor — Dev Time
                 </p>
                 <div className="flex items-center gap-4">
                   <div
@@ -112,7 +112,7 @@ export default function Workflow() {
               </div>
               <div className="flex-1">
                 <p className="text-xs uppercase tracking-wider text-cyan-400 mb-3 font-semibold">
-                  React/Next.js + AI Workflow
+                  React/Next.js + AI Workflow — Dev Time
                 </p>
                 <div className="flex items-center gap-4">
                   <div

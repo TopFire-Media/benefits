@@ -15,7 +15,7 @@ const benefits = [
     icon: Bot,
     title: "AI-Powered Development",
     description:
-      "Claude Code in VS Code generates components, writes logic, and iterates in real-time. What took days now takes hours. What took weeks now takes days.",
+      "Claude Code integrates directly into the developer's IDE to assist with components, logic, and iteration in real-time. What took days now takes hours. What took weeks now takes days.",
     highlight: "3-5x Faster",
   },
   {
@@ -43,7 +43,7 @@ const benefits = [
     icon: Sparkles,
     title: "Modern DX",
     description:
-      "TypeScript, hot reload, built-in routing, image optimization, and SEO tools out of the box. The developer experience makes the team faster and happier.",
+      "TypeScript, hot reload, built-in routing, image optimization, and SEO best practices baked into the framework. Much of what requires separate SEO tooling or services with WordPress comes standard here.",
     highlight: "Next-Gen Tooling",
   },
 ];
