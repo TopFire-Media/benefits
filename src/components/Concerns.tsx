@@ -26,7 +26,7 @@ const concerns = [
     icon: DollarSign,
     concern: "Is Vercel hosting going to cost more?",
     answer:
-      "Vercel Pro is $20/month per project with generous limits. Compare that to VPS costs plus hours spent on server maintenance. When you factor in labor savings, total cost drops significantly.",
+      "Vercel Pro is $20/user/month with unlimited projects — every franchise site deploys under one plan. Compare that to per-site VPS costs plus hours spent on server maintenance. When you factor in labor savings, the total cost drops significantly.",
   },
 ];
 

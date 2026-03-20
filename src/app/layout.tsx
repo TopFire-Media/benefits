@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "The Future of Franchise Web Development | TopFire Media",
   description:
     "Why React/Next.js and AI-powered development is the future of franchise website creation at TopFire Media.",
+  icons: {
+    icon: "/tfm-logo.png",
+  },
 };
 
 export default function RootLayout({
