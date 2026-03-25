@@ -167,36 +167,38 @@ function StackedBar({ phase, index }: { phase: PhaseData; index: number }) {
       </div>
 
       {/* Stacked horizontal bar */}
-      <div className="h-12 md:h-14 rounded-xl overflow-hidden flex relative">
-        {phase.hours.map((item, i) => {
-          const pct = (item.hours / total) * 100;
-          return (
-            <motion.div
-              key={item.key}
-              className="relative group cursor-default"
-              initial={{ width: 0 }}
-              whileInView={{ width: `${pct}%` }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: 0.3 + i * 0.05 + index * 0.15,
-                ease: [0.4, 0, 0.2, 1],
-              }}
-              style={{
-                background: categories[item.key].color,
-                minWidth: pct > 3 ? undefined : "4px",
-              }}
-            >
-              {/* Tooltip */}
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10"
-                style={{ background: "rgba(0,0,0,0.9)", border: "1px solid rgba(255,255,255,0.1)" }}
+      <div className="relative pt-10">
+        <div className="h-12 md:h-14 rounded-xl flex">
+          {phase.hours.map((item, i) => {
+            const pct = (item.hours / total) * 100;
+            return (
+              <motion.div
+                key={item.key}
+                className="relative group cursor-default h-full first:rounded-l-xl last:rounded-r-xl"
+                initial={{ width: 0 }}
+                whileInView={{ width: `${pct}%` }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.3 + i * 0.05 + index * 0.15,
+                  ease: [0.4, 0, 0.2, 1],
+                }}
+                style={{
+                  background: categories[item.key].color,
+                  minWidth: pct > 3 ? undefined : "4px",
+                }}
               >
-                <span className="font-semibold text-white">{item.hours}h</span>
-                <span className="text-slate-400 ml-1">{categories[item.key].label}</span>
-              </div>
-            </motion.div>
-          );
-        })}
+                {/* Tooltip */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10"
+                  style={{ background: "rgba(0,0,0,0.9)", border: "1px solid rgba(255,255,255,0.1)" }}
+                >
+                  <span className="font-semibold text-white">{item.hours}h</span>
+                  <span className="text-slate-400 ml-1">{categories[item.key].label}</span>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Legend items */}
@@ -596,8 +598,8 @@ export default function ResourceAllocation() {
             Capacity Heatmap
           </h3>
           <p className="text-sm text-slate-500 mb-8">
-            Watch the red shrink and the green grow &mdash; same 120 hours,
-            radically different output.
+            Same 120 hours, radically different output. Low-ROI hours drop
+            while high-value revenue hours take their place.
           </p>
         </FadeIn>
 
