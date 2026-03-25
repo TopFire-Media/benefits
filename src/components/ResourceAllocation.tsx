@@ -267,9 +267,16 @@ function CapacityHeatmap() {
     },
   ];
 
+  const phaseLabels = [
+    { label: "Before", color: "text-red-400" },
+    { label: "Current", color: "text-amber-400" },
+    { label: "After", color: "text-emerald-400" },
+  ];
+
   return (
     <FadeIn delay={0.2}>
-      <div className="glass-card overflow-hidden rounded-2xl">
+      {/* Desktop: table layout */}
+      <div className="hidden md:block glass-card overflow-hidden rounded-2xl">
         {/* Header */}
         <div
           className="grid grid-cols-[1.5fr_1fr_1fr_1fr]"
@@ -278,18 +285,14 @@ function CapacityHeatmap() {
             background: "rgba(255,255,255,0.03)",
           }}
         >
-          <div className="p-4 md:p-5 text-sm font-semibold text-slate-500 uppercase tracking-wider">
+          <div className="p-5 text-sm font-semibold text-slate-500 uppercase tracking-wider">
             Category
           </div>
-          <div className="p-4 md:p-5 text-sm font-semibold text-red-400 uppercase tracking-wider text-center">
-            Before
-          </div>
-          <div className="p-4 md:p-5 text-sm font-semibold text-amber-400 uppercase tracking-wider text-center">
-            Current
-          </div>
-          <div className="p-4 md:p-5 text-sm font-semibold text-emerald-400 uppercase tracking-wider text-center">
-            After
-          </div>
+          {phaseLabels.map((p) => (
+            <div key={p.label} className={`p-5 text-sm font-semibold ${p.color} uppercase tracking-wider text-center`}>
+              {p.label}
+            </div>
+          ))}
         </div>
 
         {rows.map((row, i) => (
@@ -303,9 +306,9 @@ function CapacityHeatmap() {
                   : "none",
             }}
           >
-            <div className="p-4 md:p-5">
+            <div className="p-5">
               <div
-                className="font-semibold text-sm md:text-base text-slate-100"
+                className="font-semibold text-base text-slate-100"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {row.label}
@@ -315,12 +318,9 @@ function CapacityHeatmap() {
               </div>
             </div>
             {[row.before, row.during, row.after].map((val, j) => (
-              <div
-                key={j}
-                className="p-4 md:p-5 flex items-center justify-center"
-              >
+              <div key={j} className="p-5 flex items-center justify-center">
                 <motion.div
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-xl flex flex-col items-center justify-center"
+                  className="w-20 h-20 rounded-xl flex flex-col items-center justify-center"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -330,10 +330,7 @@ function CapacityHeatmap() {
                     border: `1px solid ${row.colorScale(val)}40`,
                   }}
                 >
-                  <span
-                    className="text-lg md:text-xl font-bold"
-                    style={{ color: row.colorScale(val) }}
-                  >
+                  <span className="text-xl font-bold" style={{ color: row.colorScale(val) }}>
                     {val}
                   </span>
                   <span className="text-[10px] text-slate-500">hrs/wk</span>
@@ -341,6 +338,49 @@ function CapacityHeatmap() {
               </div>
             ))}
           </div>
+        ))}
+      </div>
+
+      {/* Mobile: stacked cards */}
+      <div className="md:hidden space-y-4">
+        {rows.map((row, i) => (
+          <motion.div
+            key={row.label}
+            className="glass-card p-5 rounded-2xl"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 * i }}
+          >
+            <div
+              className="font-semibold text-base text-slate-100 mb-1"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {row.label}
+            </div>
+            <div className="text-xs text-slate-500 mb-4">{row.sublabel}</div>
+            <div className="flex justify-between gap-3">
+              {[row.before, row.during, row.after].map((val, j) => (
+                <div key={j} className="flex-1 flex flex-col items-center gap-1.5">
+                  <span className={`text-[10px] font-semibold uppercase tracking-wider ${phaseLabels[j].color}`}>
+                    {phaseLabels[j].label}
+                  </span>
+                  <div
+                    className="w-full aspect-square max-w-[72px] rounded-xl flex flex-col items-center justify-center"
+                    style={{
+                      background: `${row.colorScale(val)}20`,
+                      border: `1px solid ${row.colorScale(val)}40`,
+                    }}
+                  >
+                    <span className="text-xl font-bold" style={{ color: row.colorScale(val) }}>
+                      {val}
+                    </span>
+                    <span className="text-[9px] text-slate-500">hrs/wk</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         ))}
       </div>
     </FadeIn>
