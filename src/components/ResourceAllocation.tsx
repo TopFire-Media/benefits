@@ -76,7 +76,7 @@ const categories = {
   finishingProjects: {
     label: "Finishing Existing Projects",
     color: "#60a5fa",
-    description: "Completing sites and projects that came in before the freeze",
+    description: "Completing sites and projects that came in before integration",
   },
 };
 
@@ -104,7 +104,7 @@ const phases: PhaseData[] = [
   },
   {
     label: "Current",
-    subtitle: "New Client Freeze",
+    subtitle: "Integration",
     hours: [
       { key: "maintenance", hours: 25 },
       { key: "manual", hours: 15 },
