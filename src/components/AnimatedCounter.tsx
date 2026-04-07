@@ -44,11 +44,23 @@ export default function AnimatedCounter({
     return () => cancelAnimationFrame(animationFrame);
   }, [isInView, end, duration]);
 
+  // Dual-render: the animated count is shown on screen, but during print
+  // the IntersectionObserver never fires (cards below the fold) and React
+  // state updates don't make it into Chrome's print snapshot. So we render
+  // the final value alongside the animated one and toggle visibility via
+  // @media print in globals.css.
   return (
     <span ref={ref}>
-      {prefix}
-      {count.toFixed(decimals)}
-      {suffix}
+      <span className="counter-animated">
+        {prefix}
+        {count.toFixed(decimals)}
+        {suffix}
+      </span>
+      <span className="counter-print">
+        {prefix}
+        {end.toFixed(decimals)}
+        {suffix}
+      </span>
     </span>
   );
 }

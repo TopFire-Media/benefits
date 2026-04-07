@@ -91,15 +91,12 @@ export default function Workflow() {
                     className="flex-1 h-4 rounded-full overflow-hidden"
                     style={{ background: "rgba(255,255,255,0.06)" }}
                   >
-                    <motion.div
+                    <div
                       className="h-full rounded-full"
                       style={{
+                        width: "100%",
                         background: "linear-gradient(90deg, #ef4444, #f59e0b)",
                       }}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "100%" }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.5, delay: 0.3 }}
                     />
                   </div>
                   <span
@@ -119,15 +116,12 @@ export default function Workflow() {
                     className="flex-1 h-4 rounded-full overflow-hidden"
                     style={{ background: "rgba(255,255,255,0.06)" }}
                   >
-                    <motion.div
+                    <div
                       className="h-full rounded-full"
                       style={{
+                        width: "20%",
                         background: "linear-gradient(90deg, #3b82f6, #06b6d4)",
                       }}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "20%" }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.3 }}
                     />
                   </div>
                   <span

@@ -261,3 +261,192 @@ body {
   0%, 100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
   50% { box-shadow: 0 0 25px rgba(59, 130, 246, 0.4); }
 }
+
+/* AnimatedCounter dual-render: hide the print-only span on screen */
+.counter-print {
+  display: none;
+}
+
+/* Hero stats: print-only static table version is hidden on screen */
+.hero-stats-print {
+  display: none;
+}
+
+/* ---------- Print / Save as PDF ---------- */
+@media print {
+  /* AnimatedCounter dual-render: show the static final value, hide the
+     animated one (which would be stuck at 0 during print snapshot). */
+  .counter-animated {
+    display: none !important;
+  }
+  .counter-print {
+    display: inline !important;
+  }
+
+  @page {
+    size: Letter;
+    margin: 0.5in;
+  }
+
+  /* Preserve the dark presentation look on paper/PDF */
+  html,
+  body {
+    background: #06060c !important;
+    color: #f1f5f9 !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    /* Kill animations so nothing is mid-transform at capture time */
+    animation: none !important;
+    transition: none !important;
+    /* Force any IntersectionObserver/motion-hidden content to be visible.
+       FadeIn.tsx and motion's whileInView leave elements at opacity:0 until
+       they scroll into view — which never happens during print, so pages 2+
+       came out blank. */
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    filter: none !important;
+    /* Chrome's print engine rasterizes backdrop-filter as an opaque layer
+       that paints over content. Several components use it inline (Hero
+       stats bar, etc.), not just .glass-card — so kill it everywhere. */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Hide interactive chrome that doesn't belong in a PDF */
+  .no-print,
+  nav.no-print {
+    display: none !important;
+  }
+
+  /* Hide decorative blur orbs and noise — they print as ugly blobs */
+  .orb,
+  .noise-overlay,
+  .hero-grid {
+    display: none !important;
+  }
+
+  main {
+    min-height: 0 !important;
+  }
+
+  /* Hero uses inline style minHeight: 90vh which, combined with
+     flex centering, pushes content out of the printable page area —
+     specifically the stats bar at the bottom of the centered content.
+     Reset min-height on all sections in print. */
+  section {
+    min-height: 0 !important;
+  }
+
+  /* Let sections break cleanly across pages */
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  /* Keep headings attached to their following content */
+  h1, h2, h3, h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Avoid orphaned images and cards */
+  img,
+  .glass-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Chrome rasterizes backdrop-filter as an opaque layer over content
+     during print — cards rendered with color but no text. Kill it. */
+  .glass-card,
+  .nav-blur {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+  }
+
+  /* Chrome's print engine collapses inline-grid in some layouts (the Hero
+     stats bar disappears entirely). Force it to render as a normal grid. */
+  .inline-grid {
+    display: grid !important;
+  }
+
+  /* Hero stats: hide the screen version (inline-grid was unreliable in
+     print) and show the static table version instead. */
+  .hero-stats-screen {
+    display: none !important;
+  }
+  .hero-stats-print {
+    display: table !important;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .hero-stats-print td {
+    padding: 12px 16px;
+    text-align: center;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .hero-stats-print td:first-child {
+    border-left: none;
+  }
+  .hero-stats-print-value {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: #06b6d4;
+  }
+  .hero-stats-print-label {
+    font-size: 10px;
+    color: #94a3b8;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+
+  /* .gradient-text uses background-clip:text + transparent fill. Chrome's
+     print engine fails at background-clip:text, so the element renders
+     with the gradient as a solid background and the text becomes invisible —
+     producing giant colored rectangles where headings should be. Render
+     as solid accent-colored text instead. */
+  .gradient-text,
+  .gradient-text-warm {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: currentColor !important;
+    color: #06b6d4 !important;
+  }
+  .gradient-text-warm {
+    color: #f59e0b !important;
+  }
+
+  /* .gradient-border uses mask-composite: exclude on a ::before overlay.
+     Print rendering fails at mask-composite and the pseudo fills the whole
+     card, covering its content. Hide the overlay; keep a plain border. */
+  .gradient-border::before {
+    display: none !important;
+  }
+  .gradient-border {
+    border: 1px solid rgba(59, 130, 246, 0.4) !important;
+  }
+
+  /* Ensure links are visible but not noisy */
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+}

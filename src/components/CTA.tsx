@@ -6,7 +6,7 @@ import { ArrowUpRight, Rocket } from "lucide-react";
 export default function CTA() {
   return (
     <section id="cta" className="relative py-20 md:py-28">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none no-print">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full"
           style={{

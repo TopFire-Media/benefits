@@ -91,11 +91,8 @@ export default function Hero() {
         </motion.div>
 
         {/* Stats bar */}
-        <motion.div
-          initial={mounted ? { opacity: 0, y: 30 } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="inline-grid grid-cols-2 md:grid-cols-4 rounded-2xl overflow-hidden"
+        <div
+          className="hero-stats-screen inline-grid grid-cols-2 md:grid-cols-4 rounded-2xl overflow-hidden"
           style={{
             background: "rgba(255, 255, 255, 0.05)",
             border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -135,7 +132,27 @@ export default function Hero() {
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
+
+        {/* Print-only static stats bar — the screen version uses inline-grid
+            which Chrome's print engine collapses unpredictably. */}
+        <table className="hero-stats-print" cellPadding={0} cellSpacing={0}>
+          <tbody>
+            <tr>
+              {[
+                { value: "3-5x", label: "Faster Development" },
+                { value: "100", label: "Lighthouse Score" },
+                { value: "$0", label: "Server Maintenance" },
+                { value: "99.99%", label: "Uptime on Vercel" },
+              ].map((stat) => (
+                <td key={stat.value}>
+                  <div className="hero-stats-print-value">{stat.value}</div>
+                  <div className="hero-stats-print-label">{stat.label}</div>
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       {/* Scroll indicator */}

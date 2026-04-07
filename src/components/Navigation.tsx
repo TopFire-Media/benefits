@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Printer } from "lucide-react";
 import Image from "next/image";
 
 const navLinks = [
@@ -25,7 +25,7 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`no-print fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled ? "nav-blur" : ""
       }`}
     >
@@ -56,6 +56,15 @@ export default function Navigation() {
               {link.label}
             </a>
           ))}
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+            aria-label="Save as PDF"
+          >
+            <Printer size={16} />
+            PDF
+          </button>
           <a
             href="#cta"
             className="text-sm px-5 py-2 rounded-full text-white font-medium transition-shadow hover:shadow-lg"
@@ -67,12 +76,22 @@ export default function Navigation() {
           </a>
         </div>
 
-        <button
-          className="md:hidden text-slate-400"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-4">
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="text-slate-400 hover:text-white transition-colors"
+            aria-label="Save as PDF"
+          >
+            <Printer size={22} />
+          </button>
+          <button
+            className="text-slate-400"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
